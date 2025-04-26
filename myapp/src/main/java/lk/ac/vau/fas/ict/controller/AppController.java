@@ -4,13 +4,17 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import lk.ac.vau.fas.ict.model.Student;
 
 @RestController
-@RequestMapping("app")
+@RequestMapping("/app")
 public class AppController {
 
 	Student st1 = new Student("2020ICT103","Alice",25,"IT",3.8);
@@ -19,11 +23,7 @@ public class AppController {
 	Student st4 = new Student("2020ICT09","Michel",25,"IT",3.1);
 	Student st5 = new Student("2020ICT05","Nick",22,"IT",3.0);
 	
-	//Student[] arr = {ob1,ob2,ob3,ob4};
-	/*@GetMapping("/list")
-	public Student[] getdetails() {
-		return arr;
-	}*/
+
 	
 	private Map<String,Student> mstudent = new HashMap<String,Student>();
 	
@@ -39,4 +39,24 @@ public class AppController {
 	public Map<String,Student> getdetails(){
 		return mstudent;
 	}
+	
+	
+	/*add student*/
+	@PostMapping("/add")
+	public String addstudent(@RequestBody Student student) {
+		mstudent.put(student.getRegNo(),student);
+		return "New Student Added";
+	}
+	
+	//Update the student
+	   @PutMapping("/update/{id}")
+	   public String UpdateStudent(@PathVariable("id") String regNo,@RequestBody Student student)
+	   {
+		   if(mstudent.get(regNo) != null)
+		   {
+			mstudent.put(student.getRegNo(), student);
+			   return "Update Successfully!";
+		   }
+		   return "404 Student not found";
+	   }
 }
