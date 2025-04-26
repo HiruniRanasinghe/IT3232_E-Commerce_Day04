@@ -1,6 +1,6 @@
 # IT3232_E-Commerce_Day04
 
-# Outputs
+# Practical Outputs
 
 ![Output1](https://github.com/user-attachments/assets/17856cea-eafc-4a30-833f-3bd63e62e905)
 
